@@ -11,7 +11,7 @@ To write a python program for creating File Transfer using TCP Sockets Links
 CLIENT:
 #DEVELOPED BY:GOPIKA S
 #REGISTER NO:212225230082
-
+```
 import socket
 s = socket.socket()
 host = socket.gethostname()
@@ -30,9 +30,9 @@ f.close()
 print('Successfully get the file')
 s.close()
 print('connection closed')
-
+```
 SERVER:
-
+```
 import socket
 port = 60000
 s = socket.socket()
@@ -54,6 +54,7 @@ while True:
     print('Done sending')
     conn.send('Thank you for connecting'.encode())
     conn.close()
+```
 ## OUPUT
 CLIENT:
 <img width="1000" height="384" alt="WhatsApp Image 2026-05-27 at 1 13 00 PM (1)" src="https://github.com/user-attachments/assets/3d7577dd-a57c-4a53-8ccf-194362d3d6c0" />
