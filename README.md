@@ -17,47 +17,49 @@ s = socket.socket()
 host = socket.gethostname()
 port = 60000
 s.connect((host, port))
-s.send("Hello server!".encode())
-with open('mytext.txt', 'wb') as f:
- while True:
-    print('receiving data...')
+s.send("Hello Server".encode())
+file = open("received_file.txt", "wb")
+print("Receiving file...")
+while True:
     data = s.recv(1024)
-    print('data=%s', (data))
     if not data:
         break
-    f.write(data)
-f.close()
-print('Successfully get the file')
+    file.write(data)
+print("File received successfully")
+file.close()
 s.close()
-print('connection closed')
+       
 ```
 SERVER:
 ```
 import socket
-port = 60000
 s = socket.socket()
 host = socket.gethostname()
+port = 60000
 s.bind((host, port))
-s.listen(5)
-while True:
-    conn, addr = s.accept()
-    data = conn.recv(1024)
-    print('Server received', repr(data))
-    filename='mytext.txt'
-    f = open(filename,'rb')
-    l = f.read(1024)
-    while (l):
-        conn.send(l)
-        print('Sent ',repr(l))
-        l = f.read(1024)
-    f.close()
-    print('Done sending')
-    conn.send('Thank you for connecting'.encode())
-    conn.close()
+s.listen(1)
+print("Server listening...")
+c, addr = s.accept()
+print("Connected with", addr)
+msg = c.recv(1024).decode()
+print("Client says:", msg)
+filename = "C:/Users/acer/OneDrive/Desktop/New folder (2)/sample.txt"
+file = open(filename, "rb")
+data = file.read(1024)
+while data:
+    c.send(data)
+    data = file.read(1024)
+print("File sent successfully")
+file.close()
+c.close()
+s.close()
 ```
 ## OUPUT
 CLIENT:
-<img width="1000" height="384" alt="WhatsApp Image 2026-05-27 at 1 13 00 PM (1)" src="https://github.com/user-attachments/assets/3d7577dd-a57c-4a53-8ccf-194362d3d6c0" />
+<img width="1846" height="963" alt="Screenshot 2026-05-28 214057" src="https://github.com/user-attachments/assets/52014b96-b95d-4020-8ed1-67e3f5d18c70" />
+
+SERVER:
+<img width="1850" height="969" alt="Screenshot 2026-05-28 214040" src="https://github.com/user-attachments/assets/f18ee0b8-40f6-4d0b-a567-e3f6b886105a" />
 
 ## RESULT
 Thus, the python program for creating File Transfer using TCP Sockets Links was 
